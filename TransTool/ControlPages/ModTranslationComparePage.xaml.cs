@@ -31,18 +31,18 @@ namespace TransTool.ControlPages
             InitializeComponent();
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            Task.Run(async () =>
+            await Task.Run(async () =>
             {
                 await _context.Database.EnsureCreatedAsync();
                 await _context.ModInfos.LoadAsync();
-                var infos = _context.ModInfos.Where(_ => _.ModNickName == "野兽先辈").ToArray();
-                _context.ModInfos.RemoveRange(infos);
                 await _context.SaveChangesAsync();
             });
             ModList.ItemsSource = _context.ModInfos.Local.ToObservableCollection();
+            ToggleHistoryNode();
             ModList.DisplayMemberPath = "ModNickName";
+            HistoryView.DisplayMemberPath = "TimeOffset";
         }
 
         private async void Page_UnLoaded(object sender, RoutedEventArgs e)
@@ -79,6 +79,15 @@ namespace TransTool.ControlPages
                 }
             });
             await _context.SaveChangesAsync();
+        }
+
+        private void ToggleHistoryNode()
+        {
+            if (ModList.SelectedValue is ModInfo mi)
+            {
+                var his = _context.ModInfos.First(_ => _.Guid == mi.Guid).TranslationHistories;
+                HistoryView.ItemsSource = null;
+            }
         }
     }
 }

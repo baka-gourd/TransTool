@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:TransTool.ControlPages"
       xmlns:ui="http://schemas.modernwpf.com/2019"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="960"
       Title="FillUntranslatedWordPage">
 
     <Grid>

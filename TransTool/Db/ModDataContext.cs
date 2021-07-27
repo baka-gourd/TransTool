@@ -34,7 +34,6 @@ namespace TransTool.Db
         public long CurseForgeId { get; set; }
         public string ModSlug { get; set; }
         public string ModNickName { get; set; }
-        [ForeignKey("Guid")]
         public List<TranslationHistory> TranslationHistories { get; set; }
     }
 
@@ -43,6 +42,8 @@ namespace TransTool.Db
     {
         [Key]
         public Guid Guid { get; set; }
+        [ForeignKey("Guid")]
+        public Guid ModGuid { get; set; }
         public DateTimeOffset TimeOffset { get; set; }
         public string Memo { get; set; }
         [ForeignKey("Guid")]
@@ -54,6 +55,8 @@ namespace TransTool.Db
     {
         [Key]
         public Guid Guid { get; set; }
+        [ForeignKey("Guid")]
+        public Guid HistoryGuid { get; set; }
         public string Key { get; set; }
         public string Origin { get; set; }
         public string Localized { get; set; }
