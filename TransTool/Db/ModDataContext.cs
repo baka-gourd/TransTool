@@ -10,6 +10,8 @@ namespace TransTool.Db
     public class ModDataContext : DbContext
     {
         public DbSet<ModInfo> ModInfos { get; set; }
+        public DbSet<TranslationHistory> TranslationHistories { get; set; }
+        public DbSet<LanguageKeyValuePair> LanguageKeyValuePairs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -42,8 +44,6 @@ namespace TransTool.Db
     {
         [Key]
         public Guid Guid { get; set; }
-        [ForeignKey("Guid")]
-        public Guid ModGuid { get; set; }
         public DateTimeOffset TimeOffset { get; set; }
         public string Memo { get; set; }
         [ForeignKey("Guid")]
@@ -55,8 +55,6 @@ namespace TransTool.Db
     {
         [Key]
         public Guid Guid { get; set; }
-        [ForeignKey("Guid")]
-        public Guid HistoryGuid { get; set; }
         public string Key { get; set; }
         public string Origin { get; set; }
         public string Localized { get; set; }

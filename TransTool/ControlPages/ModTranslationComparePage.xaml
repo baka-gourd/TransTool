@@ -28,6 +28,7 @@
                          DockPanel.Dock="Top"
                          Margin="0,2,0,0"
                          SelectedIndex="0"
+                         SelectionChanged="ModList_OnSelectionChanged"
                          >
             </ui:ListView>
         </DockPanel>
@@ -51,12 +52,12 @@
                     <ColumnDefinition Width="120"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <ui:AutoSuggestBox Grid.Column="1" PlaceholderText="模组名（英文）" Margin="2,0,2,0"></ui:AutoSuggestBox>
-                <ui:AutoSuggestBox Grid.Column="2" PlaceholderText="CF ID" Margin="2,0,2,0"></ui:AutoSuggestBox>
-                <ui:AutoSuggestBox Grid.Column="3" PlaceholderText="CF slug" Margin="2,0,2,0"></ui:AutoSuggestBox>
-                <ui:AutoSuggestBox Grid.Column="4" PlaceholderText="显示名" Margin="2,0,2,0"></ui:AutoSuggestBox>
-                <ui:AutoSuggestBox Grid.Column="5" PlaceholderText="备注" Margin="2,0,2,0"></ui:AutoSuggestBox>
-                <Button Grid.Column="6" Click="ButtonBase_OnClick" VerticalAlignment="Center" Margin="2,0,0,0" Width="74">添加</Button>
+                <ui:AutoSuggestBox x:Name="InModName" Grid.Column="1" PlaceholderText="模组名（英文）" Margin="2,0,2,0"></ui:AutoSuggestBox>
+                <ui:AutoSuggestBox x:Name="InCfId" Grid.Column="2" PlaceholderText="CF ID" Margin="2,0,2,0"></ui:AutoSuggestBox>
+                <ui:AutoSuggestBox x:Name="InCfSlug" Grid.Column="3" PlaceholderText="CF slug" Margin="2,0,2,0"></ui:AutoSuggestBox>
+                <ui:AutoSuggestBox x:Name="InNickName" Grid.Column="4" PlaceholderText="显示名" Margin="2,0,2,0"></ui:AutoSuggestBox>
+                <ui:AutoSuggestBox x:Name="InMemo" Grid.Column="5" PlaceholderText="备注" Margin="2,0,2,0"></ui:AutoSuggestBox>
+                <Button Grid.Column="6" x:Name="AddButton" Click="Add_OnClick" VerticalAlignment="Center" Margin="2,0,0,0" Width="74">添加</Button>
             </Grid>
 
             <Grid Grid.Row="3">
@@ -69,7 +70,7 @@
 
                 <ui:AutoSuggestBox Grid.Column="1" PlaceholderText="英文文件路径" Margin="2,0,2,0"></ui:AutoSuggestBox>
                 <ui:AutoSuggestBox Grid.Column="2" PlaceholderText="中文文件路径" Margin="2,0,2,0"></ui:AutoSuggestBox>
-                <Button Grid.Column="3" Margin="2,0,2,0">当前模组</Button>
+                <Button x:Name="CurrentModButton" Click="CurrentModButton_OnClick" Grid.Column="3" Margin="2,0,2,0">当前模组</Button>
             </Grid>
 
             <Grid Grid.Row="5">
@@ -87,10 +88,48 @@
                                        x:Name="HistoryFind">
                     </ui:AutoSuggestBox>
                     <ui:ListView DockPanel.Dock="Top"
-                                 x:Name="HistoryView">
-
+                                 x:Name="HistoryView"
+                                 Margin="0,1,0,0"
+                                 SelectedIndex="0"
+                                 SelectionChanged="HistoryView_OnSelectionChanged">
                     </ui:ListView>
                 </DockPanel>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="12"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="12"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="48"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="12"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="12"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="12"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="12"></RowDefinition>
+                        <RowDefinition Height="32"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="240"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" x:Name="ExportO" VerticalAlignment="Center" HorizontalAlignment="Center">导出源文件为Json</Button>
+                        <Button Grid.Column="1" x:Name="ExportC" VerticalAlignment="Center" HorizontalAlignment="Center">导出翻译后文件为Json</Button>
+                    </Grid>
+                    <TextBlock Grid.Row="1" x:Name="MemoBlock" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></TextBlock>
+                    <CheckBox Grid.Row="5" x:Name="Mode1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">导出新增条目</CheckBox>
+                    <CheckBox Grid.Row="7" x:Name="Mode2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">导出更改条目</CheckBox>
+                    <CheckBox Grid.Row="9" x:Name="Mode3" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">导出新增条目位置</CheckBox>
+                    <CheckBox Grid.Row="11" x:Name="Mode4" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">导出更改条目位置</CheckBox>
+                    <CheckBox Grid.Row="13" x:Name="Mode5" VerticalAlignment="Center" HorizontalAlignment="Center" Width="150">导出未更改条目</CheckBox>
+                    <Button Grid.Row="14" x:Name="ExportButton" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24">导出</Button>
+                </Grid>
             </Grid>
         </Grid>
     </Grid>
