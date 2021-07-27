@@ -1,0 +1,47 @@
+﻿<Page x:Class="TransTool.Navigation.NavigationRootPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TransTool.Navigation"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="NavigationRootPage">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <DockPanel Grid.Row="1" Grid.Column="0"
+                   Margin="12">
+            <ui:AutoSuggestBox x:Name="ControlsSearchBox"
+                               DockPanel.Dock="Top"
+                               PlaceholderText="搜索..."
+                               QueryIcon="Find"
+                               QuerySubmitted="ControlsSearchBox_OnQuerySubmitted"
+                               TextChanged="ControlsSearchBox_OnTextChanged">
+            </ui:AutoSuggestBox>
+            <ui:ListView x:Name="PageList"
+                         DockPanel.Dock="Top"
+                         DisplayMemberPath="Title"
+                         Margin="0,2,0,0"
+                         SelectedIndex="0"
+                         SelectionChanged="PageList_OnSelectionChanged">
+                <ui:ListView.ItemsSource>
+                    <local:ControlPagesData/>
+                </ui:ListView.ItemsSource>
+            </ui:ListView>
+        </DockPanel>
+
+        <local:NaviFrame Grid.Row="1"
+                         Grid.Column="1"
+                         x:Name="RootFrame"></local:NaviFrame>
+    </Grid>
+</Page>

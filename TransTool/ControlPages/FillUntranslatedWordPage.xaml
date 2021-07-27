@@ -1,0 +1,39 @@
+﻿<Page x:Class="TransTool.ControlPages.FillUntranslatedWordPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TransTool.ControlPages"
+      xmlns:ui="http://schemas.modernwpf.com/2019"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="FillUntranslatedWordPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="12"></ColumnDefinition>
+            <ColumnDefinition Width="480"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12"></RowDefinition>
+            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="12"></RowDefinition>
+            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="12"></RowDefinition>
+            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="12"></RowDefinition>
+            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="12"></RowDefinition>
+            <RowDefinition Height="48"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <ui:AutoSuggestBox x:Name="OldUlFile" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" QueryIcon="Document" PlaceholderText="旧的源语言文件（无则留空） " QuerySubmitted="Select_OnQuerySubmitted"/>
+        <ui:AutoSuggestBox x:Name="OldLFile" Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" QueryIcon="Document" PlaceholderText="旧的中文本地化文件（无则留空）" QuerySubmitted="Select_OnQuerySubmitted"/>
+        <ui:AutoSuggestBox x:Name="NewUlFile" Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" QueryIcon="Document" PlaceholderText="新的源语言文件" QuerySubmitted="Select_OnQuerySubmitted"/>
+        <ui:AutoSuggestBox x:Name="NewLFile" Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" QueryIcon="Document" PlaceholderText="新的中文本地化文件" QuerySubmitted="Select_OnQuerySubmitted"/>
+        <Button Grid.Column="1" Grid.Row="9" Content="执行！" VerticalAlignment="Center" HorizontalAlignment="Right"></Button>
+        <CheckBox Grid.Column="1" Grid.Row="9" VerticalAlignment="Center" HorizontalAlignment="Left" Content="使用指定源语言填充（不选为空字符串）"></CheckBox>
+    </Grid>
+</Page>
